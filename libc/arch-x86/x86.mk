@@ -10,6 +10,7 @@ _LIBC_ARCH_COMMON_SRC_FILES := \
     arch-x86/bionic/sigsetjmp.S \
     arch-x86/bionic/syscall.S \
     arch-x86/bionic/vfork.S \
+
     arch-x86/string/ffs.S
 
 ifeq ($(ARCH_X86_HAVE_SSSE3),true)
@@ -81,6 +82,7 @@ _LIBC_ARCH_COMMON_SRC_FILES += \
 	upstream-freebsd/lib/libc/string/wcslen.c \
 	upstream-freebsd/lib/libc/string/wcscmp.c
 endif
+
 
 _LIBC_ARCH_STATIC_SRC_FILES := \
     bionic/dl_iterate_phdr_static.c \
