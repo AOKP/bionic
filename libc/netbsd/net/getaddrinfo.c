@@ -1865,19 +1865,19 @@ error:
 	free(elems);
 }
 
-static bool _using_default_dns(const char *iface)
+static int _using_default_dns(const char *iface)
 {
 	char buf[IF_NAMESIZE+1];
 	size_t if_len;
 
 	// common case
-	if (iface == NULL || *iface == '\0') return true;
+	if (iface == NULL || *iface == '\0') return 1;
 
 	if_len = _resolv_get_default_iface(buf, sizeof(buf));
-	if (if_len != 0 && if_len + 1 <= sizeof(buf)) {
-		if (strcmp(buf, iface) == 0) return true;
+	if (if_len + 1 <= sizeof(buf)) {
+		if (strcmp(buf, iface) != 0) return 0;
 	}
-	return false;
+	return 1;
 }
 
 /*ARGSUSED*/
