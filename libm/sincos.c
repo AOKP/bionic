@@ -26,6 +26,18 @@
  */
 #define _GNU_SOURCE 1
 #include <math.h>
+#define INLINE_KERNEL_COSDF
+#define INLINE_KERNEL_SINDF
+#include "upstream-freebsd/lib/msun/src/math_private.h"
+#include "upstream-freebsd/lib/msun/src/k_cosf.c"
+#include "upstream-freebsd/lib/msun/src/k_sinf.c"
+
+/* Small multiples of pi/2 rounded to double precision. */
+static const double
+	s1pio2 = 1*M_PI_2,		/* 0x3FF921FB, 0x54442D18 */
+	s2pio2 = 2*M_PI_2,		/* 0x400921FB, 0x54442D18 */
+	s3pio2 = 3*M_PI_2,		/* 0x4012D97C, 0x7F3321D2 */
+	s4pio2 = 4*M_PI_2;		/* 0x401921FB, 0x54442D18 */
 
 // Disable sincos optimization for all functions in this file,
 // otherwise gcc would generate infinite calls.
