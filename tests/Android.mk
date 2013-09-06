@@ -188,6 +188,25 @@ include $(BUILD_HOST_NATIVE_TEST)
 endif
 
 # -----------------------------------------------------------------------------
+# Unit tests run on host with bionic .so
+# -----------------------------------------------------------------------------
+
+# We can use the same binaries as for device, but need to do some extra setup:
+#  1. We need linker as well as all library deps.
+#  2. Need /system/bin writable location on host since all Android executables
+#  are looking for linker over there.
+#  3. Need EXTERNAL_STORAGE as temporary location
+# Note: tests which are testing Android specifics (e.g. properties) will fail.
+ifeq ($(HOST_OS)-$(HOST_ARCH),linux-x86)
+linker_name=linker
+
+bionic-unit-tests-run-on-host: bionic-unit-tests $(linker_name)
+	cp $(TARGET_OUT_EXECUTABLES)/$(linker_name) /system/bin
+	LD_LIBRARY_PATH=$(TARGET_OUT_SHARED_LIBRARIES) EXTERNAL_STORAGE=/tmp \
+          $(TARGET_OUT_DATA_NATIVE_TESTS)/bionic-unit-tests/bionic-unit-tests
+endif
+
+# -----------------------------------------------------------------------------
 # FORTIFY_SOURCE tests
 # -----------------------------------------------------------------------------
 
