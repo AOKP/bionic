@@ -152,6 +152,18 @@ typedef struct {
 
 extern lldiv_t   lldiv(long long, long long);
 
+#if __ISO_C_VISIBLE >= 1999
+extern __noreturn void  _Exit(int);
+#endif /*__ISO_C_VISIBLE >= 1999 */
+
+/*
+ * If we're in a mode greater than C99, expose C11 functions
+ */
+#if __ISO_C_VISIBLE >= 2011 || __cplusplus >= 201103L
+int	at_quick_exit(void (*)(void));
+extern __noreturn void quick_exit(int);
+#endif /* __ISO_C_VISIBLE >= 2011 */
+
 #if 1 /* MISSING FROM BIONIC - ENABLED FOR STLPort and libstdc++-v3 */
 /* make STLPort happy */
 extern int      mblen(const char *, size_t);
