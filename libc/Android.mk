@@ -528,6 +528,10 @@ ifeq ($(TARGET_ARCH),x86)
   endif
 endif # x86
 
+ifeq ($(ARCH_ARM_HAVE_ARMV7A),true)
+  libc_common_cflags += -DNEON_UNALIGNED_ACCESS -DNEON_MEMCPY_ALIGNMENT_DIVIDER=224
+endif
+
 ifeq ($(TARGET_ARCH),mips)
   ifneq ($(ARCH_MIPS_HAS_FPU),true)
     libc_common_cflags += -DSOFTFLOAT
