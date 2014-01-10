@@ -47,6 +47,9 @@ extern volatile int*   __errno(void);
 /* a macro expanding to the errno l-value */
 #define  errno   (*__errno())
 
+/* bionic's errno has glibc's __errno_location behavior */
+#define __errno_location errno
+
 __END_DECLS
 
 #endif /* _ERRNO_H */
