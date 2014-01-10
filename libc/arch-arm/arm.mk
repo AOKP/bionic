@@ -14,6 +14,10 @@ _LIBC_ARCH_COMMON_SRC_FILES := \
     arch-arm/bionic/_setjmp.S \
     arch-arm/bionic/setjmp.S \
     arch-arm/bionic/sigsetjmp.S \
+    arch-arm/bionic/strlcat.S \
+    arch-arm/bionic/strncmp.S \
+    arch-arm/bionic/strncat.S \
+    arch-arm/bionic/strnlen.S \
     arch-arm/bionic/syscall.S \
     arch-arm/bionic/tgkill.S \
     arch-arm/bionic/tkill.S \
